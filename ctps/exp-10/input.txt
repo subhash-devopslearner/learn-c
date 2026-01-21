@@ -1,0 +1,1 @@
+This string is to write in file input.txt

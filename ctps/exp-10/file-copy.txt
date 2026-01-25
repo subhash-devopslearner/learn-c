@@ -1,0 +1,6 @@
+A file is data stored under a specific name on a storage device. A stream represents a
+sequence of bytes. A Text File stores information using ASCII characters. In text files,
+each line ends with a special character called the EOL (End of Line) or delimiter. When
+this EOL character is read or written, internal translations happen. A Binary file contains
+data in the same format as in memory. Binary files do not use line delimiters, and no
+translations occur.

@@ -10,36 +10,50 @@ data in the same format as in memory. Binary files do not use line delimiters, a
 translations occur.
 */
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(){
-
+int main() {
     FILE *fp;
     char ch;
-    int chars=0, spaces=0, words=0, lines=0;
-
-    // Reading file
+    int characters = 0, spaces = 0, words = 0, lines = 0;
+    int inWord = 0;
 
     fp = fopen("file.txt", "r");
 
-    if(fp == NULL){
-        printf("Unable to open file");
+    if (fp == NULL) {
+        printf("Unable to open file\n");
         exit(0);
     }
 
-    while((ch=fgetc(fp))!=EOF){
-        chars++;
-        if(ch==' ' || ch=='\t' )
+    while ((ch = fgetc(fp)) != EOF) {
+        characters++;
+
+        if (ch == ' ' || ch == '\t') {
             spaces++;
-        if(ch=='\n')
+            inWord = 0;
+        }
+        else if (ch == '\n') {
             lines++;
+            inWord = 0;
+        }
+        else {
+            if (inWord == 0) {
+                words++;
+                inWord = 1;
+            }
+        }
     }
 
-    printf("Characters in file are: %d\n", chars);
-    printf("Spaces in file are: %d\n", spaces);
-    printf("Words in file are: %d\n", spaces + 1);
-    printf("Lines in file are: %d\n", lines);
+    if (characters > 0)
+        lines++;   // count last line if file is not empty
 
-    return 0;    
+    fclose(fp);
+
+    printf("Characters in file: %d\n", characters);
+    printf("Spaces in file: %d\n", spaces);
+    printf("Words in file: %d\n", words);
+    printf("Lines in file: %d\n", lines);
+
+    return 0;
 }

@@ -1,3 +1,7 @@
+/*
+All file operations in one program
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
